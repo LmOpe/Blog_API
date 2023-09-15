@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "dj_rest_auth",
     "dj_rest_auth.registration",
+    "drf_spectacular",
     # Local
     "accounts.apps.AccountsConfig",
     "posts.apps.PostsConfig",
@@ -150,6 +151,7 @@ REST_FRAMEWORK = { # new
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
     ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema", 
 }
 
 
@@ -166,3 +168,21 @@ CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 SITE_ID = 1
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Blog API Project",
+    "DESCRIPTION": "A sample blog to learn about DRF",
+    "VERSION": "1.0.0",
+}
+
+# Swagger UI settings
+CSP_DEFAULT_SRC = ("'self'", "'unsafe-inline'", "cdn.jsdelivr.net")
+CSP_IMG_SRC = ("'self'", "data:", "cdn.jsdelivr.net")
+
+# REDOC settings
+CSP_DEFAULT_SRC = ("'self'", "cdn.jsdelivr.net")
+# required for both CDN and SIDECAR
+CSP_WORKER_SRC = ("'self'", "blob:")
+CSP_IMG_SRC = ("'self'", "data:", "cdn.redoc.ly")
+CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", "fonts.googleapis.com")
+CSP_FONT_SRC = ("'self'", "fonts.gstatic.com")
